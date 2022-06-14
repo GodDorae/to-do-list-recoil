@@ -1,26 +1,34 @@
 import { atom, selector } from "recoil";
 
-export enum Categories {
-    "TO_DO" = "TO_DO",
-    "DOING" = "DOING",
-    "DONE" = "DONE",
-}
+// export enum Categories {
+//     "TO_DO" = "TO_DO",
+//     "DOING" = "DOING",
+//     "DONE" = "DONE",
+// }
 
 export interface IToDo {
   text: string;
-  category: Categories
+  category: string;
   id: number;
 }
 
-export const categoryState = atom<Categories>({
+export const categoryState = atom<string>({
   key: "category",
-  default: Categories.TO_DO,
+  default: "TO_DO",
 });
 
-let output = localStorage.getItem("toDos");
-let localData = JSON.parse(output as any);
+let categoryOutput = localStorage.getItem("categories");
+let localCategoryData = JSON.parse(categoryOutput as any);
 
-export const toDoState = atom<IToDo[]>({ key: "toDo", default: localData });
+export const categories = atom({
+  key: "categories",
+  default: localCategoryData || ["TO_DO", "DOING", "DONE"],
+});
+
+let toDoOutput = localStorage.getItem("toDos");
+let localToDoData = JSON.parse(toDoOutput as any);
+
+export const toDoState = atom<IToDo[]>({ key: "toDo", default: localToDoData || [] });
 
 export const toDoSelector = selector({
   key: "toDoSelector",

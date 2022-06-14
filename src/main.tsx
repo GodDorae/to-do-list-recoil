@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from 'styled-components';
-import App from './App';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import { ThemeProvider } from "styled-components";
+import App from "./App";
 import { darkTheme } from "./theme";
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <BrowserRouter>
     <RecoilRoot>
       <ThemeProvider theme={darkTheme}>
-        <App />
+        <Routes>
+          <Route path="/to-do-list-recoil/" element={<App />} />
+        </Routes>
       </ThemeProvider>
     </RecoilRoot>
-  </React.StrictMode>
-)
+  </BrowserRouter>
+);
